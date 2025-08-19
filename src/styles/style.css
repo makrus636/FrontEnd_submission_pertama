@@ -1,0 +1,22 @@
+body {
+  
+}
+
+.app-header {
+  padding: 2px 10px;
+  box-shadow: 1.4px 1.4px gainsboro;
+}
+
+main {
+  padding: 10px;
+}
+
+.add-notes {
+  display: grid;
+}
+
+.add-notes form {
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
