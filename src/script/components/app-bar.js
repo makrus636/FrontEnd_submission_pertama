@@ -23,12 +23,24 @@ class AppBar extends HTMLElement {
       
       div {
         padding: 20px 18px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
       }
 
       .app-name {
         margin: 0;
   
         font-size: 1.2rem;
+      }
+      
+      button {
+        background-color: white;
+        border: none;
+      }
+      
+      button:active {
+        background-color: #bbb;
       }
       `;
     
@@ -51,7 +63,9 @@ class AppBar extends HTMLElement {
     
       <div>
         <h1 class="app-name">Catatan</h1>
+        <button id="showFormBtn" name="showFormBtn">Tambah Catatan</button>
       </div>
+      
     `;
   }
 }

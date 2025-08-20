@@ -1,5 +1,5 @@
 body {
-  
+  margin: 0;
 }
 
 .app-header {
@@ -9,14 +9,5 @@ body {
 
 main {
   padding: 10px;
-}
-
-.add-notes {
-  display: grid;
-}
-
-.add-notes form {
-  border: 1px solid black;
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  
 }
