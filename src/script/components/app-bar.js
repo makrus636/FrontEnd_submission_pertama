@@ -63,7 +63,7 @@ class AppBar extends HTMLElement {
     
       <div>
         <h1 class="app-name">Catatan</h1>
-        <button id="showFormBtn" name="showFormBtn">Tambah Catatan</button>
+        <button id="showFormBtn" onclick="showForm()" name="showFormBtn">Tambah Catatan</button>
       </div>
       
     `;

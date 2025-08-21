@@ -13,7 +13,22 @@
   </header>
   
   <main>
-    <div id="spaceForm"></div>
+    <div id="spaceForm">
+      <div id="form-container" class="form-container">
+        <h2>Catatan Baru</h2>
+        <form method="POST">
+          <p>
+            <label for="title">Judul</label>
+            <input type="text" name="title" id="title" required />
+          </p>
+          <p>
+            <textarea name="body" id="body" cols="30" rows="10" required></textarea>
+          </p>
+            <button type="submit">Kirim</button>
+          </form>
+        </div>
+      </div>
+    <p class="out"></p>
   </main>
   
   <footer>
@@ -21,5 +36,6 @@
   </footer>
   <script type="module" src="src/script/components/index.js"></script>
   <script src="src/script/action/showForm.js"></script>
+  <script src="src/script/action/add-note.js"></script>
 </body>
 </html>
