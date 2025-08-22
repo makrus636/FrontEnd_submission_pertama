@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
 }
 
 .app-header {
@@ -28,9 +30,17 @@ h2 {
   
 form {
     padding: 10px;
-    padding-top: ;
+    padding-top: 0;
 }
 form p {
     display: flex;
     flex-direction: column;
+}
+
+form p input,
+form p textarea {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 4.5px;
+    font-size: 1rem;
 }

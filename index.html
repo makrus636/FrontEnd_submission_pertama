@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="src/styles/style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
   <title>Submission Catatan</title>
 </head>
 
@@ -18,17 +23,18 @@
         <h2>Catatan Baru</h2>
         <form method="POST">
           <p>
-            <label for="title">Judul</label>
-            <input type="text" name="title" id="title" required />
+            <input type="text" name="title" id="title" placeholder="Judul" required />
           </p>
           <p>
             <textarea name="body" id="body" cols="30" rows="10" required></textarea>
           </p>
             <button type="submit">Kirim</button>
-          </form>
-        </div>
+        </form>
       </div>
-    <p class="out"></p>
+    </div>
+    <note-list>
+
+    </note-list>
   </main>
   
   <footer>
@@ -36,6 +42,13 @@
   </footer>
   <script type="module" src="src/script/components/index.js"></script>
   <script src="src/script/action/showForm.js"></script>
-  <script src="src/script/action/add-note.js"></script>
+  <script type="module" src="src/script/add-note.js"></script>
+  <script type="module">
+    import home from './src/script/view/home.js';
+
+    addEventListener('DOMContentLoaded', () => {
+      home();
+    });
+  </script>
 </body>
 </html>
