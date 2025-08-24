@@ -1,89 +1,59 @@
-import Utils from '../Utils.js';
 
 class NoteList extends HTMLElement {
-  _shadowRoot = null;
+
   _style = null;
-
-  _column = 2;
-  _gutter = 16;
-
-  static get observedAttributes() {
-    return ['column', 'gutter'];
-  }
 
   constructor() {
     super();
-
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: 'open' });
     this._style = document.createElement('style');
+  }
 
-    this.render();
+  static get observedAttributes() {
+    return ['notes-data'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'notes-data') {
+      this.renderNotes();
+    }
   }
 
   _updateStyle() {
     this._style.textContent = `
-      :host {
-        display: block;
-      }
-      
-      .list {
-        display: grid;
-        grid-template-columns: ${'1fr '.repeat(this.column)};
-      
-        gap: ${this.gutter}px;
-      }
-    `;
-  }
+    :host {
+      margin-block: 1rem;
 
-  set column(value) {
-    const newValue = Number(value);
-    if (!Utils.isValidInteger(newValue)) return;
-
-    this._column = value;
-  }
-
-  get column() {
-    return this._column;
-  }
-
-  set gutter(value) {
-    const newValue = Number(value);
-    if (!Utils.isValidInteger(newValue)) return;
-
-    this._gutter = value;
-  }
-
-  get gutter() {
-    return this._gutter;
-  }
-
-  _emptyContent() {
-    this._shadowRoot.innerHTML = '';
-  }
-
-  render() {
-    this._emptyContent();
-    this._updateStyle();
-
-    this._shadowRoot.appendChild(this._style);
-    this._shadowRoot.innerHTML += `
-      <div class="list">
-        <slot></slot>
-      </div>
-    `;
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    switch (name) {
-      case 'column':
-        this.column = newValue;
-        break;
-      case 'gutter':
-        this.gutter = newValue;
-        break;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 14px;
+      row-gap: 22px;
     }
+    @media screen and (max-width: 576px) {
+      :host {
+      grid-template-columns: 1fr;
+      }
+    }
+    `;
+  }
 
-    this.render();
+  renderNotes() {
+    this._updateStyle();
+    this.shadowRoot.appendChild(this._style);
+    this.shadowRoot.innerHTML += '';
+
+    const notesData = JSON.parse(this.getAttribute('notes-data') || '[]');
+
+    notesData.forEach(note => {
+      const noteItemElement = document.createElement('note-item');
+      
+      noteItemElement.setAttribute('title', note.title);
+      noteItemElement.setAttribute('body', note.body);
+      noteItemElement.setAttribute('created-at', note.createdAt);
+      noteItemElement.setAttribute('archived', note.archived);
+      
+      this.shadowRoot.appendChild(noteItemElement);
+    });
   }
 }
 

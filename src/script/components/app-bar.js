@@ -40,7 +40,12 @@ class AppBar extends HTMLElement {
       }
       
       button:active {
-        background-color: #bbb;
+        background-color: #ccc;
+        color: white;
+      }
+
+      button:hover {
+        background-color: #ddd;
       }
       `;
     

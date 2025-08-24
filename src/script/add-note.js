@@ -16,6 +16,8 @@ form.addEventListener('submit', (event) => {
   };
   notesData.push(newNote);
   console.log('New note added:', notesData);
+  const noteListElement = document.querySelector('note-list');
+  noteListElement.setAttribute('notes-data', JSON.stringify(notesData));
   titleInput.value = '';
   bodyInput.value = '';
 });

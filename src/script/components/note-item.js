@@ -1,73 +1,56 @@
+
 class NoteItem extends HTMLElement {
-  _shadowRoot = null;
-  _style = null;
-  _note = {
-    id: null,
-    title: null,
-    body: null,
-    createdAt: null,
-    archived: false,
-  };
-  
   constructor() {
     super();
-    
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._style = document.createElement('style');
+    this.attachShadow({ mode: 'open' });
   }
-  
-  _emptyContent() {
-    this._shadowRoot.innerHTML = '';
+
+  static get observedAttributes() {
+    return ['title', 'body', 'created-at', 'archived'];
   }
-  
-  set note(value) {
-    this._note = value;
-    
+
+  attributeChangedCallback(name, oldValue, newValue) {
     this.render();
   }
-  
-  get note() {
-    return this._note;
-  }
-  
-  _updateStyle() {
-    this._style.textContent = `
-      :host {
-        display: block;
-        border-radius: 8px;
-        
-        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
-        overflow: hidden;
-      }
 
-      #card h3 {
-        font-weight: lighter;
-      }
-
-      #card p {
-        display: -webkit-box;
-        margin-top: 10px;
-        
-        overflow: hidden;
-
-        text-overflow: ellipsis;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 5; /* number of lines to show */
-      }
-    `;
-  }
-  
   render() {
-    this._emptyContent();
-    this._updateStyle();
+    const title = this.getAttribute('title') || 'Tidak ada Judul';
+    const body = this.getAttribute('body') || 'Tidak ada Isi';
+    const createdAt = this.getAttribute('created-at') || '';
+    const archived = this.getAttribute('archived') === 'true';
     
-    this._shadowRoot.appendChild(this._style);
-    this._shadowRoot.innerHTML += `
-    <div class="card">
-      <h3>${this._note.title}</h3>
-      <p>${this._note.body}</p>
-      <small>${new Date(this._note.createdAt).toLocaleString()}</small>
-    </div>
+    this.shadowRoot.innerHTML = `
+      <style>
+        .note-item {
+          background-color: #f9f9f9;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          padding: 15px;
+          margin-bottom: 10px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .note-title {
+          font-size: 1.2em;
+          font-weight: bold;
+          color: #333;
+        }
+        .note-content {
+          margin-top: 5px;
+          color: #666;
+        }
+        small {
+          color: #999;
+        }
+      </style>
+      <div class="note-item">
+        <h3 class="note-title">${title}</h3>
+        <p class="note-content">${body}</p>
+        <small>Created at: ${new Date(createdAt).toLocaleString()}</small>
+        <br>
+        <small>Archived: ${archived}</small>
+      </div>
     `;
   }
 }
+
+customElements.define('note-item', NoteItem);

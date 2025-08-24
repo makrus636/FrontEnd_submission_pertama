@@ -18,7 +18,7 @@ class FooterBar extends HTMLElement {
  
       div {
         padding: 24px 20px;
- 
+        border-top: 1px solid black;
         text-align: center;
       }
     `;
